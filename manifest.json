@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Dailymotion Downloader",
+  "version": "0.0.2",
+  "description": "Dailymotion Downloader",
+  "browser_action": {
+    "default_title": "Dailymotion Downloader",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "activeTab"
+  ],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.dailymotion.com/video/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
