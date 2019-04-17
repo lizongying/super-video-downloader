@@ -19,14 +19,10 @@ const notify = (data) => {
     });
 };
 
-// 获取数据
-const getData = (arr) => {
+// Dailymotion
+const getDailymotion = (arr) => {
     const url = 'https://www.dailymotion.com/player/metadata/video/';
-    fetch(url + arr[1], {
-        headers: {
-            'content-type': 'application/json'
-        }
-    }).then(function (response) {
+    fetch(url + arr[1]).then(function (response) {
         return response.json()
     }).then(function (myJson) {
         console.log(myJson);
@@ -37,6 +33,21 @@ const getData = (arr) => {
     });
 };
 
+// Vigo
+const getVigovideo = (arr) => {
+    const url = 'https://api.hypstar.com/hotsoon/item/';
+    fetch(url + arr[1] + '/').then(function (response) {
+        return response.json()
+    }).then(function (myJson) {
+        console.log(myJson);
+        const videos = Object.values(myJson['data']['video']['url_list']);
+        notify(['setVideo', videos[videos.length - 1]]);
+        const covers = Object.values(myJson['data']['video']['cover']['url_list']);
+        notify(['setCover', covers[covers.length - 1]]);
+    });
+};
+
 window.bg = {
-    getData: getData,
+    getDailymotion: getDailymotion,
+    getVigovideo: getVigovideo,
 };

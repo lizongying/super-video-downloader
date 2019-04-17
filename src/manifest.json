@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Super Video Downloader",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Super Video Downloader",
   "browser_action": {
     "default_title": "Super Video Downloader",
@@ -15,17 +15,9 @@
   },
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "https://api.hypstar.com/*",
+    "http://p16-hypstarcdn-com.akamaized.net/*"
   ],
-  "options_page": "options.html",
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.dailymotion.com/video/*"
-      ],
-      "js": [
-        "content.js"
-      ]
-    }
-  ]
+  "options_page": "options.html"
 }

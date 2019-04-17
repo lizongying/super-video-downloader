@@ -6,14 +6,14 @@ const setVideo = (src) => {
     const video = document.querySelector('#video');
     const videoUrl = document.querySelector('#video-url');
     video.src = src;
-    videoUrl.innerText = 'video_path: ' + src;
+    videoUrl.href = src;
 };
 
 const setCover = (src) => {
     const cover = document.querySelector('#cover');
     const coverUrl = document.querySelector('#cover-url');
     cover.src = src;
-    coverUrl.innerText = 'cover_path: ' + src;
+    coverUrl.href = src;
 };
 
 // ui
@@ -37,6 +37,7 @@ window.onload = () => {
         const tabURL = tabs[0].url;
         const regexList = [
             {regex: /(www.dailymotion.com)\/video\/(.+)/},
+            {regex: /(www.vigovideo.net)\/share\/video\/(\d+?)\//},
         ];
         regexList.some((item) => {
             let result = tabURL.match(item.regex);
@@ -51,7 +52,11 @@ window.onload = () => {
         console.log(arr);
         switch (arr[0]) {
             case 'www.dailymotion.com': {
-                bg.getData(arr);
+                bg.getDailymotion(arr);
+                break;
+            }
+            case 'www.vigovideo.net': {
+                bg.getVigovideo(arr);
                 break;
             }
         }

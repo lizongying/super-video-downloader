@@ -3,6 +3,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
+
+const name ='Super Video Downloader';
 
 module.exports = {
     mode: 'production',
@@ -16,7 +19,6 @@ module.exports = {
         background: './src/js/background',
         options: './src/js/options',
         popup: './src/js/popup',
-        content: './src/js/content',
     },
     module: {
         rules: [
@@ -46,7 +48,7 @@ module.exports = {
             inject: true,
             filename: 'popup.html',
             template: './src/popup.html',
-            title: 'Super Video Downloader',
+            title: name,
             chunks: ['popup'],
             minify: {
                 collapseBooleanAttributes: true,
@@ -71,7 +73,7 @@ module.exports = {
             inject: true,
             filename: 'options.html',
             template: './src/options.html',
-            title: 'Super Video Downloader',
+            title: name,
             chunks: ['options'],
             minify: {
                 collapseBooleanAttributes: true,
@@ -98,5 +100,10 @@ module.exports = {
                 to: path.join(__dirname, './dist/manifest.json'),
             },
         ]),
+        new ZipPlugin({
+            path: '../zip',
+            filename: name,
+            pathPrefix: 'dist',
+        })
     ],
 };
